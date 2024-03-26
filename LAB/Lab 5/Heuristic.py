@@ -43,21 +43,20 @@ class Graph:
             current = came_from[current]
         return path
 
-# Define the new graph with different values and nodes
-graph_3 = {
-    'M': {'N': 4, 'O': 3},
-    'N': {'M': 4, 'O': 2, 'P': 5},
-    'O': {'M': 3, 'N': 2, 'P': 1},
-    'P': {'N': 5, 'O': 1, 'Q': 2},
-    'Q': {'P': 2}
+graph = {
+    'X': {'Y': 2, 'Z': 3},
+    'Y': {'X': 2, 'Z': 4, 'W': 5},
+    'Z': {'X': 3, 'Y': 4, 'W': 1},
+    'W': {'Y': 5, 'Z': 1, 'V': 2},
+    'V': {'W': 2}
 }
 
-node_value_3 = {
-    'M': 3,
-    'N': 2,
-    'O': 2,
-    'P': 4,
-    'Q': 1
+node_value = {
+    'X': 2,
+    'Y': 3,
+    'Z': 1,
+    'W': 2,
+    'V': 4
 }
 
 
@@ -67,7 +66,7 @@ g = Graph(graph, node_value)
 # Example usage:
 if __name__ == "__main__":
     start_node = 'V'
-    end_node = 'S'
+    end_node = 'X'
     path = g.astar(start_node, end_node)
 
     print("A* Path from", start_node, "to", end_node, ":", path)
