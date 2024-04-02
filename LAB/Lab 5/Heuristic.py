@@ -44,19 +44,20 @@ class Graph:
         return path
 
 graph = {
-    'X': {'Y': 2, 'Z': 3},
-    'Y': {'X': 2, 'Z': 4, 'W': 5},
-    'Z': {'X': 3, 'Y': 4, 'W': 1},
-    'W': {'Y': 5, 'Z': 1, 'V': 2},
-    'V': {'W': 2}
+    'S': {'A': 2, 'B': 1},
+    'A': {'S': 2, 'B': 4, 'C': 8},
+    'B': {'S': 1, 'A': 4, 'D': 2},
+    'C': {'A': 8, 'D': 7, 'G': 4},
+    'D': {'B': 2, 'C': 7, 'G': 1},
+    'G': {'C': 4, 'D': 1}
 }
-
 node_value = {
-    'X': 2,
-    'Y': 3,
-    'Z': 1,
-    'W': 2,
-    'V': 4
+    'S': 7,
+    'A': 6,
+    'B': 2,
+    'C': 3,
+    'D': 1,
+    'G': 0
 }
 
 
@@ -65,8 +66,8 @@ g = Graph(graph, node_value)
 
 # Example usage:
 if __name__ == "__main__":
-    start_node = 'V'
-    end_node = 'X'
+    start_node = 'S'
+    end_node = 'D'
     path = g.astar(start_node, end_node)
 
     print("A* Path from", start_node, "to", end_node, ":", path)

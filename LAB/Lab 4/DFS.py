@@ -7,6 +7,7 @@ def dfs(graph, start, target=None):
 
     while stack:   
         node, path = stack.pop()  
+        
         if node not in visited:
             visited.append(node)
 

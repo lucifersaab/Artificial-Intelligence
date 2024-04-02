@@ -1,1 +1,1 @@
-if
+len(list1)==len(list2)
