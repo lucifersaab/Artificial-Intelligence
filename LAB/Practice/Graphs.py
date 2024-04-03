@@ -14,6 +14,7 @@ def bfs(graph, start, end):
     return None
 
 def dfs(graph, start, end, path=[]):
+    print(start)
     if start == end:
         return path + [start]
     if start not in graph:
@@ -36,7 +37,7 @@ if __name__ == "__main__":
         'G': ['C', 'D']
     }
     
-    start_node = 'A'
+    start_node = 'S'
     end_node = 'D'
     
     bfs_path = bfs(graph, start_node, end_node)
