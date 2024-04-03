@@ -63,46 +63,59 @@ def greedy(graph,start,end):
 
 def astar(graph,start,end):
     visited=set()
-    queue=[(node_value[start]+0,start,[start])]  # (total_cost, node, path)
-    heapq.heapify(queue) 
+    queue=[(node_value[start],0,start,[start])] # (total_cost,g_cost,node,path) 1 more value added to keep record of g_cost for each node
+    heapq.heapify(queue)
     while queue:
-        cost,current,path=heapq.heappop(queue)  # we won't be using the cost here
-        if current==end:
+        total_cost,g_cost,node,path=heapq.heappop(queue) #not using total_cost here, just used for priority queue heapify
+        if(node==end):
             return path
-        if current not in visited:
-            visited.add(current)
-            for neighbor,edge_cost in graph[current].items(): # we won't be using the edge_cost here
+        if node not in visited:
+            visited.add(node)
+            for neighbor,cost in graph[node].items():
                 if neighbor not in visited:
-                    heapq.heappush(queue,((node_value[neighbor]+cost+edge_cost),neighbor,path + [neighbor])) # used total cost here by adding heuristics, edge_cost and previous cost
-            heapq.heapify(queue)
+                    neighbor_g_cost=cost+g_cost # calculate g_cost for neighbor
+                    heapq.heappush(queue,(neighbor_g_cost+node_value[neighbor],neighbor_g_cost,neighbor,path+[neighbor])) # update queue
     return None
 
+# graph = {
+#     'S': {'A': 2, 'B': 1},
+#     'A': {'S': 2, 'B': 4, 'C': 8},
+#     'B': {'S': 1, 'A': 4, 'D': 2},
+#     'C': {'A': 8, 'D': 7, 'G': 4},
+#     'D': {'B': 2, 'C': 7, 'G': 1},
+#     'G': {'C': 4, 'D': 1}}
+# node_value = {
+#     'S': 7,
+#     'A': 6,
+#     'B': 2,
+#     'C': 3,
+#     'D': 1,
+#     'G': 0
+# }
+
 graph = {
-    'S': {'A': 5, 'B': 3},
-    'A': {'S': 5, 'B': 2, 'C': 4},
-    'B': {'S': 3, 'A': 2, 'D': 7},
-    'C': {'A': 4, 'D': 6, 'G': 8},
-    'D': {'B': 7, 'C': 6, 'G': 9},
-    'G': {'C': 8, 'D': 9}
+    'A': {'B': 4, 'C': 3},
+    'B': {'A': 4, 'C': 2, 'D': 5},
+    'C': {'A': 3, 'B': 2, 'D': 1},
+    'D': {'B': 5, 'C': 1, 'E': 2},
+    'E': {'D': 2}
 }
 
 node_value = {
-    'S': 7,
-    'A': 6,
+    'A': 3,
     'B': 2,
-    'C': 3,
+    'C': 2,
     'D': 1,
-    'G': 0
+    'E': 0
 }
 
-
-bfs_path=bfs(graph,'S','G')
-dfs_path=dfs(graph,'S','G')
-print(bfs_path)
-print(dfs_path)
-
-ucs_path=ucs(graph,'S','G')
-print(ucs_path)
-
-astar_path=astar(graph,'S','D')
-print(astar_path)
+bfs_path=bfs(graph,'A','E')
+dfs_path=dfs(graph,'A','E')
+ucs_path=ucs(graph,'A','E')
+greedy_path=greedy(graph,'A','E')
+astar_path=astar(graph,'A','E')
+print("bfs_path: ",bfs_path)
+print("dfs_path: ",dfs_path)
+print("ucs_path: ",ucs_path)
+print("greedy_path: ",greedy_path)
+print("astar_path: ",astar_path)
