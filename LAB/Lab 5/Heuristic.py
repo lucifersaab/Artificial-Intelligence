@@ -49,8 +49,7 @@ graph = {
     'B': {'S': 1, 'A': 4, 'D': 2},
     'C': {'A': 8, 'D': 7, 'G': 4},
     'D': {'B': 2, 'C': 7, 'G': 1},
-    'G': {'C': 4, 'D': 1}
-}
+    'G': {'C': 4, 'D': 1}}
 node_value = {
     'S': 7,
     'A': 6,
@@ -67,7 +66,7 @@ g = Graph(graph, node_value)
 # Example usage:
 if __name__ == "__main__":
     start_node = 'S'
-    end_node = 'D'
+    end_node = 'G'
     path = g.astar(start_node, end_node)
 
     print("A* Path from", start_node, "to", end_node, ":", path)
